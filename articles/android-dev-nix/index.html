@@ -43,9 +43,9 @@ pkgs.mkShell {
 This is required in order to use the Android SDK.</p>
 <p>Nixpkgs provides the <code>pkgs.androidenv.composeAndroidPackages</code> function that take a set of properties for your Android SDK environment and returns a set of derivations.
 The most important one for us is <code>androidsdk</code>.
-You can read more about it on GiHub: <a href="https://github.com/NixOS/nixpkgs/blob/master/doc/languages-frameworks/android.section.md">nixos/nixpkgs # doc/languages-frameworks/android.section.md</a>.</p>
+You can read more about it on GitHub: <a href="https://github.com/NixOS/nixpkgs/blob/master/doc/languages-frameworks/android.section.md">nixos/nixpkgs # doc/languages-frameworks/android.section.md</a>.</p>
 <p>Be very careful about the versions you select for <code>toolsVersion</code>, <code>platformToolsVersion</code>, <code>buildToolsVersions</code> and <code>platformVersions</code>.
-They have to work together, and some weird errors sometime happens because you have not selected those versions so that they are compatible with one each other.</p>
+They have to work together, or else some weird errors sometime happens because you have not selected versions that are compatible with one each other.</p>
 <p>This <code>androidsdk</code> attribute is added to the <code>buildInputs</code> of <code>mkShell</code> so that we have all the Android libs and tools in our environment.</p>
 <p>This however does not set the <code>ANDROID_HOME</code> environment variable, which we define by hand in <code>mkShell</code>:</p>
 <pre><code class="language-nix">ANDROID_HOME = "${android.androidsdk}/libexec/android-sdk";
@@ -60,7 +60,7 @@ The solution is to set <code>org.gradle.project.android.aapt2FromMavenOverride</
 <p>We are ready to go!</p>
 <h2>Creating the project build configuration</h2>
 <p>We will use Gradle for our builds.</p>
-<p>Let's create our top-level gradle configuration.</p>
+<p>Let's create our top-level gradle configuration, a root file called <code>build.gradle</code>.</p>
 <pre><code class="language-gradle">buildscript {
     repositories {
         google()
@@ -131,7 +131,7 @@ dependencies {
 <p>We first apply the android plugin thanks to the first line</p>
 <pre><code class="language-gradle">apply plugin: 'com.android.application'
 </code></pre>
-<p>which allows use to use the <code>android</code> directive:</p>
+<p>which allows us to use the <code>android</code> directive:</p>
 <pre><code class="language-gradle">android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
@@ -178,8 +178,8 @@ dependencies {
 &#x3C;/manifest>
 </code></pre>
 <p>There is not much to say about it.
-It defines an application, "Demo App", with one activity named <code>com.example.myapplication.MainActivity</code>.</p>
-<p>This is a very simple empty app.</p>
+It defines an application, "Demo App", with one activity named <code>com.example.myapplication.MainActivity</code>.
+This is a very simple empty app!</p>
 <p>Now, we need some Java code.</p>
 <p>Create in <code>app/src/main/java</code> the path corresponding to the package path, here <code>app/src/main/com/example/myapplication</code>.
 In that folder, create <code>MainActivity.java</code>:</p>
@@ -197,17 +197,20 @@ public class MainActivity extends Activity {
 </code></pre>
 <p>The package path matches the folder path after <code>app/src/main/java</code>.
 The class name matches our Android manifest and extends <code>android.app.Activity</code>.
-The method inside it does not much, it just uses the super constructor.</p>
+The method inside it doesn't do much, it just uses the super constructor to create the activity.</p>
 <h2>Building our app</h2>
 <p>Open a terminal, go to the root folder of the project and get to a nix shell:</p>
 <pre><code class="language-bash">nix-shell
 </code></pre>
 <p>Then build it using Gradle</p>
-<pre><code>gradle build
+<pre><code class="language-bash">gradle build
+</code></pre>
+<p>if you use the gradle wrapper</p>
+<pre><code class="language-bash">./gradlew build
 </code></pre>
 <p>It should build without errors.</p>
 <blockquote>
-<p>If you get any errors, please create an issue <a href="https://github.com/GuillaumeDesforges/nix-android-template/issues">here</a>.</p>
+<p>If you get any errors, please <a href="https://github.com/GuillaumeDesforges/nix-android-template/issues/new">create an issue</a>.</p>
 </blockquote>
 <h2>Launching / debugging</h2>
 <p>Now's the interesting part.
@@ -220,6 +223,13 @@ From my desktop (running the emulator) I launch:</p>
 <pre><code class="language-bash">ssh -vNR 5554:localhost:5554 -R 5555:localhost:5555 devserver
 </code></pre>
 <p>where <code>devserver</code> is an SSH configuration to connect to my Linux machine.</p>
+<p>You can check if the device is available, but running in the nix shell:</p>
+<pre><code class="language-bash">adb devices
+</code></pre>
+<p>which should display something like</p>
+<pre><code>List of devices attached
+emulator-5554 device
+</code></pre>
 <p>You need an Android launch config in VS Code, see my <code>.vscode/launch.json</code>:</p>
 <pre><code class="language-json">{
     "version": "0.2.0",
