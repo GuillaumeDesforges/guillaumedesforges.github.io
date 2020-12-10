@@ -28,7 +28,7 @@ hybrid static &#x26; server rendering, TypeScript support, smart bundling, route
 No config needed.</p>
 </blockquote>
 <p>Very cool!</p>
-<p>It makes easy to build a simple application, while giving enough freedom to make it more and more complex, as features are requested.</p>
+<p>It makes it easy to build a simple application, while giving enough freedom to make it more and more complex, as features are requested.</p>
 <p>Also, it supports TypeScript, which is a hard-requirement for me.</p>
 <h3>Firebase</h3>
 <p>Firebase is part of the Google ecosystem.
@@ -106,7 +106,7 @@ I selected all default settings: "public" folder, no URL rewrites, no builds &#x
 <li><code>./functions/</code>: a TypeScript project that will define our Cloud Functions</li>
 </ul>
 <h2>Your first deploy</h2>
-<p>Let's deploy everything to check it works!</p>
+<p>Let's deploy everything to check if it works!</p>
 <p>Install dependencies for the <code>./functions/</code> folder with yarn:</p>
 <pre><code class="language-bash">yarn --cwd functions/ install
 </code></pre>
@@ -121,9 +121,9 @@ export const helloWorld = functions.https.onRequest((request, response) => {
   response.send("Hello from Firebase!");
 });
 </code></pre>
-<p>The exported items be Cloud Functions.
+<p>The exported items are going to be Cloud Functions.
 Here we define a Cloud Function <code>helloWorld</code>.</p>
-<p>The make it accessible, we need to edit <code>firebase.json</code>:</p>
+<p>To make it accessible, we need to edit <code>firebase.json</code>:</p>
 <pre><code class="language-json">{
   "functions": {
     "predeploy": [
@@ -306,7 +306,7 @@ In fact, the dependencies of your <code>my-app</code> project have to be given t
 </code></pre>
 <blockquote>
 <p>You might encounter other build errors.
-Fix them before continuing: you should be able to run <code>yarn build</code> without issues.</p>
+Fix them before continuing: you need to be able to run <code>yarn build</code> without issues.</p>
 <p>For instance, I had to <a href="https://github.com/DefinitelyTyped/DefinitelyTyped/issues/49528">hack webpack temporarly</a>.</p>
 </blockquote>
 <p>Let's deploy!</p>
