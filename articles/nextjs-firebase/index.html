@@ -47,25 +47,22 @@ I also promote the use of <a href="https://yarnpkg.com/">yarn</a> instead of npm
 <p>They conflict between each other because you install everything globally on your computer?</p>
 <p>The development experience is inconsistent across the developers workstations?</p>
 <p>Start using Nix for this project!</p>
-<pre><code class="language-bash">sh &#x3C;(curl -L https://nixos.org/nix/install) --daemon # install nix
-nix-env (Nix) 2.3.6 # check it has been installed
-</code></pre>
+<pre class="grvsc-container dark-visual-studio" data-language="bash" data-index="0"><code class="grvsc-code"><span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">sh </span><span class="mtk11">&lt;(curl -L https://nixos.org/nix/install)</span><span class="mtk1"> --daemon </span><span class="mtk3"># install nix</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">nix-env (Nix) 2.3.6 </span><span class="mtk3"># check it has been installed</span></span></span></code></pre>
 <p>create a <code>shell.nix</code> file in your project folder:</p>
-<pre><code class="language-nix">with import &#x3C;nixpkgs> {};
-mkShell {
-  buildInputs = [
-    nodejs-12_x
-    yarn
-  ];
-
-  shellHook = ''
-    export PATH=${toString ./.}/node_modules/.bin:$PATH
-  '';
-}
-</code></pre>
+<pre class="grvsc-container dark-visual-studio" data-language="nix" data-index="1"><code class="grvsc-code"><span class="grvsc-line"><span class="grvsc-source">with import &lt;nixpkgs&gt; {};</span></span>
+<span class="grvsc-line"><span class="grvsc-source">mkShell {</span></span>
+<span class="grvsc-line"><span class="grvsc-source">  buildInputs = [</span></span>
+<span class="grvsc-line"><span class="grvsc-source">    nodejs-12_x</span></span>
+<span class="grvsc-line"><span class="grvsc-source">    yarn</span></span>
+<span class="grvsc-line"><span class="grvsc-source">  ];</span></span>
+<span class="grvsc-line"><span class="grvsc-source"></span></span>
+<span class="grvsc-line"><span class="grvsc-source">  shellHook = &#39;&#39;</span></span>
+<span class="grvsc-line"><span class="grvsc-source">    export PATH=${toString ./.}/node_modules/.bin:$PATH</span></span>
+<span class="grvsc-line"><span class="grvsc-source">  &#39;&#39;;</span></span>
+<span class="grvsc-line"><span class="grvsc-source">}</span></span></code></pre>
 <p>run</p>
-<pre><code class="language-bash">nix-shell
-</code></pre>
+<pre class="grvsc-container dark-visual-studio" data-language="bash" data-index="2"><code class="grvsc-code"><span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">nix-shell</span></span></span></code></pre>
 <p>wait and... poof, you get a shell with Node JS 12 and yarn!</p>
 <p>In VS Code, you can use <a href="https://marketplace.visualstudio.com/items?itemName=arrterian.nix-env-selector">Nix Environment Selector</a>
 to get the environment in the editor (e.g. for autocomplete, TypeScript language server, ...).</p>
@@ -74,17 +71,14 @@ to get the environment in the editor (e.g. for autocomplete, TypeScript language
 <p>If you have not done it yet, create a directory for your project, we'll consider it to be our working directory.</p>
 </blockquote>
 <p>Start by installing the Firebase CLI tools.</p>
-<pre><code class="language-bash">yarn add -D firebase-tools
-</code></pre>
+<pre class="grvsc-container dark-visual-studio" data-language="bash" data-index="3"><code class="grvsc-code"><span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">yarn add -D firebase-tools</span></span></span></code></pre>
 <p>We now have to create our Firebase project.
 It can be done on the Firebase website ("Console"), but also using the CLI.</p>
 <p>In order to do such interactions, we need to login.</p>
-<pre><code class="language-bash">firebase login
-</code></pre>
+<pre class="grvsc-container dark-visual-studio" data-language="bash" data-index="4"><code class="grvsc-code"><span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">firebase login</span></span></span></code></pre>
 <p>Follow the given steps.
 After that, we can now run:</p>
-<pre><code class="language-bash">firebase init
-</code></pre>
+<pre class="grvsc-container dark-visual-studio" data-language="bash" data-index="5"><code class="grvsc-code"><span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">firebase init</span></span></span></code></pre>
 <p>Select (arrows + space) "Hosting" and "Functions", then go further (enter).</p>
 <blockquote>
 <p>"Hosting" allows you to serve static files and use rewrite rules.
@@ -108,44 +102,41 @@ I selected all default settings: "public" folder, no URL rewrites, no builds &#x
 <h2>Your first deploy</h2>
 <p>Let's deploy everything to check if it works!</p>
 <p>Install dependencies for the <code>./functions/</code> folder with yarn:</p>
-<pre><code class="language-bash">yarn --cwd functions/ install
-</code></pre>
+<pre class="grvsc-container dark-visual-studio" data-language="bash" data-index="6"><code class="grvsc-code"><span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">yarn --cwd functions/ install</span></span></span></code></pre>
 <p>Uncomment the code in <code>./functions/src/index.ts</code>.</p>
-<pre><code class="language-typescript">import * as functions from "firebase-functions";
-
-// Start writing Firebase Functions
-// https://firebase.google.com/docs/functions/typescript
-
-export const helloWorld = functions.https.onRequest((request, response) => {
-  functions.logger.info("Hello logs!", { structuredData: true });
-  response.send("Hello from Firebase!");
-});
-</code></pre>
+<pre class="grvsc-container dark-visual-studio" data-language="typescript" data-index="7"><code class="grvsc-code"><span class="grvsc-line"><span class="grvsc-source"><span class="mtk4">import</span><span class="mtk1"> </span><span class="mtk4">*</span><span class="mtk1"> </span><span class="mtk4">as</span><span class="mtk1"> functions </span><span class="mtk4">from</span><span class="mtk1"> </span><span class="mtk11">&quot;firebase-functions&quot;</span><span class="mtk1">;</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk3">// Start writing Firebase Functions</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk3">// https://firebase.google.com/docs/functions/typescript</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk4">export</span><span class="mtk1"> </span><span class="mtk4">const</span><span class="mtk1"> helloWorld = functions.https.onRequest((request, response) </span><span class="mtk4">=&gt;</span><span class="mtk1"> {</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">  functions.logger.info(</span><span class="mtk11">&quot;Hello logs!&quot;</span><span class="mtk1">, { structuredData: </span><span class="mtk4">true</span><span class="mtk1"> });</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">  response.send(</span><span class="mtk11">&quot;Hello from Firebase!&quot;</span><span class="mtk1">);</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">});</span></span></span></code></pre>
 <p>The exported items are going to be Cloud Functions.
 Here we define a Cloud Function <code>helloWorld</code>.</p>
 <p>To make it accessible, we need to edit <code>firebase.json</code>:</p>
-<pre><code class="language-json">{
-  "functions": {
-    "predeploy": [
-      "yarn --cwd functions/ build"
-    ]
-  },
-  "hosting": {
-    "public": "public",
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ],
-    "rewrites": [
-      {
-        "source": "helloWorld",
-        "function": "helloWorld"
-      }
-    ]
-  }
-}
-</code></pre>
+<pre class="grvsc-container dark-visual-studio" data-language="json" data-index="8"><code class="grvsc-code"><span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">{</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">  </span><span class="mtk8">&quot;functions&quot;</span><span class="mtk1">: {</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">    </span><span class="mtk8">&quot;predeploy&quot;</span><span class="mtk1">: [</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">      </span><span class="mtk11">&quot;yarn --cwd functions/ build&quot;</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">    ]</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">  },</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">  </span><span class="mtk8">&quot;hosting&quot;</span><span class="mtk1">: {</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">    </span><span class="mtk8">&quot;public&quot;</span><span class="mtk1">: </span><span class="mtk11">&quot;public&quot;</span><span class="mtk1">,</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">    </span><span class="mtk8">&quot;ignore&quot;</span><span class="mtk1">: [</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">      </span><span class="mtk11">&quot;firebase.json&quot;</span><span class="mtk1">,</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">      </span><span class="mtk11">&quot;**/.*&quot;</span><span class="mtk1">,</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">      </span><span class="mtk11">&quot;**/node_modules/**&quot;</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">    ],</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">    </span><span class="mtk8">&quot;rewrites&quot;</span><span class="mtk1">: [</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">      {</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">        </span><span class="mtk8">&quot;source&quot;</span><span class="mtk1">: </span><span class="mtk11">&quot;helloWorld&quot;</span><span class="mtk1">,</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">        </span><span class="mtk8">&quot;function&quot;</span><span class="mtk1">: </span><span class="mtk11">&quot;helloWorld&quot;</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">      }</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">    ]</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">  }</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">}</span></span></span></code></pre>
 <p>See that we have a <code>predeploy</code> attribute in <code>functions</code>, where we define our build command for instance.
 I have edited it to use yarn instead of npm.</p>
 <p>I added an attribute <code>rewrites</code> to <code>hosting</code>.
@@ -153,12 +144,10 @@ This allows to create rewrite rules for the web server.
 It is a list of objects, that must have the attribute <code>source</code> (the route of the url requested), and either a <code>destinatiion</code> or <code>function</code>.
 In our case, we want to redirect <code>/helloWorld</code> to our Cloud Function <code>helloWorld</code>, so we write the above rewrite rule.</p>
 <p>Let's deploy it then!</p>
-<pre><code class="language-bash">firebase deploy
-</code></pre>
+<pre class="grvsc-container dark-visual-studio" data-language="bash" data-index="9"><code class="grvsc-code"><span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">firebase deploy</span></span></span></code></pre>
 <p><strong>Woops!</strong>
 Normally you should get an error: </p>
-<pre><code>Your project nextjs-firebase must be on the Blaze (pay-as-you-go) plan to complete this command.
-</code></pre>
+<pre class="grvsc-container dark-visual-studio" data-language="" data-index="10"><code class="grvsc-code"><span class="grvsc-line"><span class="grvsc-source">Your project nextjs-firebase must be on the Blaze (pay-as-you-go) plan to complete this command.</span></span></code></pre>
 <p>Follow the link and modify your billing (if you want to continue).</p>
 <blockquote>
 <p>Disclaimer: I cannot be held accountable for any billing you might have to pay. Continue at your own risks.</p>
@@ -166,152 +155,139 @@ Normally you should get an error: </p>
 <p>... although the free plan is, in my opinion, quite large for small personnal projects.</p>
 <p>You can even set a budget alert at 1$.</p>
 <p>Let's deploy again:</p>
-<pre><code class="language-bash">firebase deploy
-</code></pre>
+<pre class="grvsc-container dark-visual-studio" data-language="bash" data-index="11"><code class="grvsc-code"><span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">firebase deploy</span></span></span></code></pre>
 <p>Go check your website!</p>
 <p>Your URL is given by the CLI (mine was <code>https://nextjs-firebase.web.app/</code>).</p>
 <p>You should be greeted by a page, which code is from <code>./public/index.html</code> in your project.</p>
 <p>Now go to the route <code>/helloWorld</code> (in my case <code>https://nextjs-firebase.web.app/helloWorld</code>)</p>
 <p>You should get:</p>
-<pre><code>Hello from Firebase!
-</code></pre>
+<pre class="grvsc-container dark-visual-studio" data-language="" data-index="12"><code class="grvsc-code"><span class="grvsc-line"><span class="grvsc-source">Hello from Firebase!</span></span></code></pre>
 <p>Congrats!</p>
 <h2>Setup NextJS</h2>
 <p>We now want to setup a NextJS app.</p>
 <p>From the working directory of our project, let's create it:</p>
-<pre><code class="language-bash">yarn create next-app --example with-typescript
-</code></pre>
+<pre class="grvsc-container dark-visual-studio" data-language="bash" data-index="13"><code class="grvsc-code"><span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">yarn create next-app --example with-typescript</span></span></span></code></pre>
 <p>I used the default name, <code>my-app</code>.
 A folder <code>my-app</code> has been created.</p>
 <p>You can run the NextJS development server locally using:</p>
-<pre><code class="language-bash">yarn --cwd my-app/ dev
-</code></pre>
+<pre class="grvsc-container dark-visual-studio" data-language="bash" data-index="14"><code class="grvsc-code"><span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">yarn --cwd my-app/ dev</span></span></span></code></pre>
 <p>That's it!
 I won't explain how to do NextJS Web development, there are many ressources out there that do so.</p>
 <p>Now, what we want to do is to run the NextJS server as a Cloud Function.</p>
 <p>Because of the way Cloud Functions gets deployed, we will need to have our NextJS app folder inside of our Cloud Functions folder.
 In my case, I decided to change the Cloud Functions folder to be the project directory.</p>
 <p>In order to make this change, we need to set <code>functions.source</code> in <code>firebase.json</code>:</p>
-<pre><code class="language-json">{
-  "functions": {
-    "source": ".",
-    "predeploy": [
-      "yarn --cwd ./ build"
-    ]
-  },
-  "hosting": {
-    "public": "public",
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ],
-    "rewrites": [
-      {
-        "source": "/helloWorld",
-        "function": "helloWorld"
-      }
-    ]
-  }
-}
-</code></pre>
+<pre class="grvsc-container dark-visual-studio" data-language="json" data-index="15"><code class="grvsc-code"><span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">{</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">  </span><span class="mtk8">&quot;functions&quot;</span><span class="mtk1">: {</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">    </span><span class="mtk8">&quot;source&quot;</span><span class="mtk1">: </span><span class="mtk11">&quot;.&quot;</span><span class="mtk1">,</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">    </span><span class="mtk8">&quot;predeploy&quot;</span><span class="mtk1">: [</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">      </span><span class="mtk11">&quot;yarn --cwd ./ build&quot;</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">    ]</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">  },</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">  </span><span class="mtk8">&quot;hosting&quot;</span><span class="mtk1">: {</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">    </span><span class="mtk8">&quot;public&quot;</span><span class="mtk1">: </span><span class="mtk11">&quot;public&quot;</span><span class="mtk1">,</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">    </span><span class="mtk8">&quot;ignore&quot;</span><span class="mtk1">: [</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">      </span><span class="mtk11">&quot;firebase.json&quot;</span><span class="mtk1">,</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">      </span><span class="mtk11">&quot;**/.*&quot;</span><span class="mtk1">,</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">      </span><span class="mtk11">&quot;**/node_modules/**&quot;</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">    ],</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">    </span><span class="mtk8">&quot;rewrites&quot;</span><span class="mtk1">: [</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">      {</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">        </span><span class="mtk8">&quot;source&quot;</span><span class="mtk1">: </span><span class="mtk11">&quot;/helloWorld&quot;</span><span class="mtk1">,</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">        </span><span class="mtk8">&quot;function&quot;</span><span class="mtk1">: </span><span class="mtk11">&quot;helloWorld&quot;</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">      }</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">    ]</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">  }</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">}</span></span></span></code></pre>
 <p>Note that I had to also change the <code>predeploy</code> hooks.</p>
 <p>I then move all the content from <code>./functions/</code> to <code>./</code>:</p>
-<pre><code class="language-bash"># remove project-level package.json
-rm package.json
-# move functions/src, tsconfig.json, package.json, 
-mv functions/{scr,tsconfig.json,package.json} .
-# reinstall dependencies
-yarn add -D firebase-tools
-yarn install
-# remove old functions folder
-rm -R functions
-</code></pre>
+<pre class="grvsc-container dark-visual-studio" data-language="bash" data-index="16"><code class="grvsc-code"><span class="grvsc-line"><span class="grvsc-source"><span class="mtk3"># remove project-level package.json</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">rm package.json</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk3"># move functions/src, tsconfig.json, package.json, </span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">mv functions/{scr,tsconfig.json,package.json} .</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk3"># reinstall dependencies</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">yarn add -D firebase-tools</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">yarn install</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk3"># remove old functions folder</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">rm -R functions</span></span></span></code></pre>
 <p>You may have to update <code>./.gitignore</code>.</p>
 <p>We can now change our Cloud Functions in <code>./src/index.ts</code>, and then rewrite all HTTP requests to this functions!</p>
 <p><code>./src/index.ts</code></p>
-<pre><code class="language-typescript">import * as admin from "firebase-admin";
-import * as functions from "firebase-functions";
-import next from "next";
-
-admin.initializeApp();
-
-const dev = process.env.NODE_ENV !== "production";
-const app = next({ dev, dir: "my-app" });
-const handle = app.getRequestHandler();
-
-export const nextjs = functions.https.onRequest(async (request, response) => {
-  console.log("Received requested: " + request.originalUrl);
-  return app.prepare().then(() => handle(request, response));
-});
-</code></pre>
+<pre class="grvsc-container dark-visual-studio" data-language="typescript" data-index="17"><code class="grvsc-code"><span class="grvsc-line"><span class="grvsc-source"><span class="mtk4">import</span><span class="mtk1"> </span><span class="mtk4">*</span><span class="mtk1"> </span><span class="mtk4">as</span><span class="mtk1"> admin </span><span class="mtk4">from</span><span class="mtk1"> </span><span class="mtk11">&quot;firebase-admin&quot;</span><span class="mtk1">;</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk4">import</span><span class="mtk1"> </span><span class="mtk4">*</span><span class="mtk1"> </span><span class="mtk4">as</span><span class="mtk1"> functions </span><span class="mtk4">from</span><span class="mtk1"> </span><span class="mtk11">&quot;firebase-functions&quot;</span><span class="mtk1">;</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk4">import</span><span class="mtk1"> next </span><span class="mtk4">from</span><span class="mtk1"> </span><span class="mtk11">&quot;next&quot;</span><span class="mtk1">;</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">admin.initializeApp();</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk4">const</span><span class="mtk1"> dev = process.env.NODE_ENV !== </span><span class="mtk11">&quot;production&quot;</span><span class="mtk1">;</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk4">const</span><span class="mtk1"> app = next({ dev, dir: </span><span class="mtk11">&quot;my-app&quot;</span><span class="mtk1"> });</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk4">const</span><span class="mtk1"> handle = app.getRequestHandler();</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk4">export</span><span class="mtk1"> </span><span class="mtk4">const</span><span class="mtk1"> nextjs = functions.https.onRequest(</span><span class="mtk4">async</span><span class="mtk1"> (request, response) </span><span class="mtk4">=&gt;</span><span class="mtk1"> {</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">  console.log(</span><span class="mtk11">&quot;Received requested: &quot;</span><span class="mtk1"> + request.originalUrl);</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">  </span><span class="mtk4">return</span><span class="mtk1"> app.prepare().then(() </span><span class="mtk4">=&gt;</span><span class="mtk1"> handle(request, response));</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">});</span></span></span></code></pre>
 <p>The key thing here is this line:</p>
-<pre><code class="language-typescript">const app = next({ dev, dir: "my-app" });
-</code></pre>
+<pre class="grvsc-container dark-visual-studio" data-language="typescript" data-index="18"><code class="grvsc-code"><span class="grvsc-line"><span class="grvsc-source"><span class="mtk4">const</span><span class="mtk1"> app = next({ dev, dir: </span><span class="mtk11">&quot;my-app&quot;</span><span class="mtk1"> });</span></span></span></code></pre>
 <p>We set the NextJS server folder to our NextJS app folder.</p>
 <p>Since the Firebase CLI will pack and upload the source folder of our Cloud Functions (here our project folder), it needs to contain the NextJS folder,
 which is why we did the moving operation above.</p>
 <p>If we hadn't done it, the Cloud Function <code>nextjs</code> wouldn't have found the NextJS app folder (and its <code>.next</code> folder).</p>
 <p>Now, we only need to setup our deployement configuration:</p>
-<pre><code class="language-json">{
-  "functions": {
-    "source": ".",
-    "predeploy": [
-      "yarn --cwd ./ build",
-      "yarn --cwd my-app/ build"
-    ],
-    "ignore": [
-      "**/node_modules/**"
-    ]
-  },
-  "hosting": {
-    "public": "public",
-    "rewrites": [
-      {
-        "source": "**",
-        "function": "nextjs"
-      }
-    ]
-  }
-}
-</code></pre>
+<pre class="grvsc-container dark-visual-studio" data-language="json" data-index="19"><code class="grvsc-code"><span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">{</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">  </span><span class="mtk8">&quot;functions&quot;</span><span class="mtk1">: {</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">    </span><span class="mtk8">&quot;source&quot;</span><span class="mtk1">: </span><span class="mtk11">&quot;.&quot;</span><span class="mtk1">,</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">    </span><span class="mtk8">&quot;predeploy&quot;</span><span class="mtk1">: [</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">      </span><span class="mtk11">&quot;yarn --cwd ./ build&quot;</span><span class="mtk1">,</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">      </span><span class="mtk11">&quot;yarn --cwd my-app/ build&quot;</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">    ],</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">    </span><span class="mtk8">&quot;ignore&quot;</span><span class="mtk1">: [</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">      </span><span class="mtk11">&quot;**/node_modules/**&quot;</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">    ]</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">  },</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">  </span><span class="mtk8">&quot;hosting&quot;</span><span class="mtk1">: {</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">    </span><span class="mtk8">&quot;public&quot;</span><span class="mtk1">: </span><span class="mtk11">&quot;public&quot;</span><span class="mtk1">,</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">    </span><span class="mtk8">&quot;rewrites&quot;</span><span class="mtk1">: [</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">      {</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">        </span><span class="mtk8">&quot;source&quot;</span><span class="mtk1">: </span><span class="mtk11">&quot;**&quot;</span><span class="mtk1">,</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">        </span><span class="mtk8">&quot;function&quot;</span><span class="mtk1">: </span><span class="mtk11">&quot;nextjs&quot;</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">      }</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">    ]</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">  }</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">}</span></span></span></code></pre>
 <p>I have added another hook to build the NextJS application.
 This will produce a <code>./my-app/.next/</code> folder with the compiled NextJS app.</p>
 <p>I also edited the <code>hosting.rewrites</code> to redirect all requests to our NextJS server.</p>
 <p>Before deployement, keep in mind that all files in <code>./public/</code> will overrule the rewrite rules and be served.
 We need to remove them, while keeping the <code>./public</code> folder.</p>
-<pre><code class="language-bash">rm public/*
-</code></pre>
+<pre class="grvsc-container dark-visual-studio" data-language="bash" data-index="20"><code class="grvsc-code"><span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">rm public/*</span></span></span></code></pre>
 <p>Note that the NextJS server will run in the function, and requires some more dependencies.
 In fact, the dependencies of your <code>my-app</code> project have to be given to the server whenever it might be neede for SSR (server-side rendering).</p>
-<pre><code>yarn add next react react-dom @types/react @types/react-dom webpack
-</code></pre>
+<pre class="grvsc-container dark-visual-studio" data-language="" data-index="21"><code class="grvsc-code"><span class="grvsc-line"><span class="grvsc-source">yarn add next react react-dom @types/react @types/react-dom webpack</span></span></code></pre>
 <p>I also had to add the <code>esModuleInterop</code> to my <code>tsconfig.json</code>:</p>
-<pre><code class="language-json">{
-  "compilerOptions": {
-    "module": "commonjs",
-    "noImplicitReturns": true,
-    "noUnusedLocals": true,
-    "outDir": "lib",
-    "sourceMap": true,
-    "strict": true,
-    "target": "es2017",
-    "esModuleInterop": true,
-  },
-  "compileOnSave": true,
-  "include": [
-    "src"
-  ]
-}
-</code></pre>
+<pre class="grvsc-container dark-visual-studio" data-language="json" data-index="22"><code class="grvsc-code"><span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">{</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">  </span><span class="mtk8">&quot;compilerOptions&quot;</span><span class="mtk1">: {</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">    </span><span class="mtk8">&quot;module&quot;</span><span class="mtk1">: </span><span class="mtk11">&quot;commonjs&quot;</span><span class="mtk1">,</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">    </span><span class="mtk8">&quot;noImplicitReturns&quot;</span><span class="mtk1">: </span><span class="mtk4">true</span><span class="mtk1">,</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">    </span><span class="mtk8">&quot;noUnusedLocals&quot;</span><span class="mtk1">: </span><span class="mtk4">true</span><span class="mtk1">,</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">    </span><span class="mtk8">&quot;outDir&quot;</span><span class="mtk1">: </span><span class="mtk11">&quot;lib&quot;</span><span class="mtk1">,</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">    </span><span class="mtk8">&quot;sourceMap&quot;</span><span class="mtk1">: </span><span class="mtk4">true</span><span class="mtk1">,</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">    </span><span class="mtk8">&quot;strict&quot;</span><span class="mtk1">: </span><span class="mtk4">true</span><span class="mtk1">,</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">    </span><span class="mtk8">&quot;target&quot;</span><span class="mtk1">: </span><span class="mtk11">&quot;es2017&quot;</span><span class="mtk1">,</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">    </span><span class="mtk8">&quot;esModuleInterop&quot;</span><span class="mtk1">: </span><span class="mtk4">true</span><span class="mtk1">,</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">  },</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">  </span><span class="mtk8">&quot;compileOnSave&quot;</span><span class="mtk1">: </span><span class="mtk4">true</span><span class="mtk1">,</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">  </span><span class="mtk8">&quot;include&quot;</span><span class="mtk1">: [</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">    </span><span class="mtk11">&quot;src&quot;</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">  ]</span></span></span>
+<span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">}</span></span></span></code></pre>
 <blockquote>
 <p>You might encounter other build errors.
 Fix them before continuing: you need to be able to run <code>yarn build</code> without issues.</p>
 <p>For instance, I had to <a href="https://github.com/DefinitelyTyped/DefinitelyTyped/issues/49528">hack webpack temporarly</a>.</p>
 </blockquote>
 <p>Let's deploy!</p>
-<pre><code class="language-bash">firebase deploy
-</code></pre>
+<pre class="grvsc-container dark-visual-studio" data-language="bash" data-index="23"><code class="grvsc-code"><span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">firebase deploy</span></span></span></code></pre>
 <p>It will ask if you would like to delete the <code>helloWorld</code> function.
 You can (should) do so.</p>
 <p>Check the given URL...</p>
@@ -320,4 +296,107 @@ You can (should) do so.</p>
 <p>If not, you should check out my repo: <a href="https://github.com/GuillaumeDesforges/nextjs-firebase">https://github.com/GuillaumeDesforges/nextjs-firebase</a></p>
 <p>If you have any issue, don't hesitate to <a href="https://github.com/GuillaumeDesforges/nextjs-firebase/issues/new">create a new issue</a>.
 I'll try my best to help you.</p>
-<p>Now you have it, fast and scalable Web app development!</p></div></div></div></main><footer style="text-align:center;padding:1em;color:#AAA">Guillaume Desforges © <!-- -->2020</footer></div></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/articles/nextjs-firebase";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"polyfill":["/polyfill-ca8adf9770cfeec4c092.js"],"app":["/app-ad67cb265854e65ca917.js"],"component---src-pages-404-js":["/component---src-pages-404-js-0db82d6eeee6490b835e.js"],"component---src-pages-index-js":["/component---src-pages-index-js-037087f6bdef211ec824.js"],"component---src-templates-article-template-js":["/component---src-templates-article-template-js-0ed56a67829c8ab1881c.js"]};/*]]>*/</script><script src="/polyfill-ca8adf9770cfeec4c092.js" nomodule=""></script><script src="/component---src-templates-article-template-js-0ed56a67829c8ab1881c.js" async=""></script><script src="/commons-c8faa090aa439f9fb613.js" async=""></script><script src="/styles-e9d24b1846c7d6eb9685.js" async=""></script><script src="/app-ad67cb265854e65ca917.js" async=""></script><script src="/framework-44697bb84c432a102996.js" async=""></script><script src="/webpack-runtime-4af22aa3d881e1b9345f.js" async=""></script></body></html>
+<p>Now you have it, fast and scalable Web app development!</p>
+<style class="grvsc-styles">
+  .grvsc-container {
+    overflow: auto;
+    position: relative;
+    -webkit-overflow-scrolling: touch;
+    padding-top: 1rem;
+    padding-top: var(--grvsc-padding-top, var(--grvsc-padding-v, 1rem));
+    padding-bottom: 1rem;
+    padding-bottom: var(--grvsc-padding-bottom, var(--grvsc-padding-v, 1rem));
+    border-radius: 8px;
+    border-radius: var(--grvsc-border-radius, 8px);
+    font-feature-settings: normal;
+    line-height: 1.4;
+  }
+  
+  .grvsc-code {
+    display: table;
+  }
+  
+  .grvsc-line {
+    display: table-row;
+    box-sizing: border-box;
+    width: 100%;
+    position: relative;
+  }
+  
+  .grvsc-line > * {
+    position: relative;
+  }
+  
+  .grvsc-gutter-pad {
+    display: table-cell;
+    padding-left: 0.75rem;
+    padding-left: calc(var(--grvsc-padding-left, var(--grvsc-padding-h, 1.5rem)) / 2);
+  }
+  
+  .grvsc-gutter {
+    display: table-cell;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+  }
+  
+  .grvsc-gutter::before {
+    content: attr(data-content);
+  }
+  
+  .grvsc-source {
+    display: table-cell;
+    padding-left: 1.5rem;
+    padding-left: var(--grvsc-padding-left, var(--grvsc-padding-h, 1.5rem));
+    padding-right: 1.5rem;
+    padding-right: var(--grvsc-padding-right, var(--grvsc-padding-h, 1.5rem));
+  }
+  
+  .grvsc-source:empty::after {
+    content: ' ';
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+  }
+  
+  .grvsc-gutter + .grvsc-source {
+    padding-left: 0.75rem;
+    padding-left: calc(var(--grvsc-padding-left, var(--grvsc-padding-h, 1.5rem)) / 2);
+  }
+  
+  /* Line transformer styles */
+  
+  .grvsc-has-line-highlighting > .grvsc-code > .grvsc-line::before {
+    content: ' ';
+    position: absolute;
+    width: 100%;
+  }
+  
+  .grvsc-line-diff-add::before {
+    background-color: var(--grvsc-line-diff-add-background-color, rgba(0, 255, 60, 0.2));
+  }
+  
+  .grvsc-line-diff-del::before {
+    background-color: var(--grvsc-line-diff-del-background-color, rgba(255, 0, 20, 0.2));
+  }
+  
+  .grvsc-line-number {
+    padding: 0 2px;
+    text-align: right;
+    opacity: 0.7;
+  }
+  
+  .dark-visual-studio {
+    background-color: #1E1E1E;
+    color: #D4D4D4;
+  }
+  .dark-visual-studio .mtk1 { color: #D4D4D4; }
+  .dark-visual-studio .mtk11 { color: #CE9178; }
+  .dark-visual-studio .mtk3 { color: #6A9955; }
+  .dark-visual-studio .mtk4 { color: #569CD6; }
+  .dark-visual-studio .mtk8 { color: #9CDCFE; }
+  .dark-visual-studio .grvsc-line-highlighted::before {
+    background-color: var(--grvsc-line-highlighted-background-color, rgba(255, 255, 255, 0.1));
+    box-shadow: inset var(--grvsc-line-highlighted-border-width, 4px) 0 0 0 var(--grvsc-line-highlighted-border-color, rgba(255, 255, 255, 0.5));
+  }
+</style></div></div></div></main><footer style="text-align:center;padding:1em;color:#AAA">Guillaume Desforges © <!-- -->2020</footer></div></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/articles/nextjs-firebase";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"polyfill":["/polyfill-ca8adf9770cfeec4c092.js"],"app":["/app-ad67cb265854e65ca917.js"],"component---src-pages-404-js":["/component---src-pages-404-js-0db82d6eeee6490b835e.js"],"component---src-pages-index-js":["/component---src-pages-index-js-037087f6bdef211ec824.js"],"component---src-templates-article-template-js":["/component---src-templates-article-template-js-0ed56a67829c8ab1881c.js"]};/*]]>*/</script><script src="/polyfill-ca8adf9770cfeec4c092.js" nomodule=""></script><script src="/component---src-templates-article-template-js-0ed56a67829c8ab1881c.js" async=""></script><script src="/commons-c8faa090aa439f9fb613.js" async=""></script><script src="/styles-e9d24b1846c7d6eb9685.js" async=""></script><script src="/app-ad67cb265854e65ca917.js" async=""></script><script src="/framework-44697bb84c432a102996.js" async=""></script><script src="/webpack-runtime-4af22aa3d881e1b9345f.js" async=""></script></body></html>
