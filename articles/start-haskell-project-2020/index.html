@@ -225,14 +225,14 @@ This has to be defined manually, for instance in <code>executable.dependencies</
 <pre class="grvsc-container dark-visual-studio" data-language="bash" data-index="10"><code class="grvsc-code"><span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">stack run</span></span></span></code></pre>
 <p>which should say, after some compilation gibberish... "Hello world" !</p>
 <h3>Setting up an IDE: Haskell Language Server</h3>
-<p>Unfortunatly, the Haskell Language Server currently still needs a bit of manual work in order to work.
+<p>Unfortunately, the Haskell Language Server currently still needs a bit of manual work in order to work.
 But don't worry, there's not much to do!</p>
 <p>First, HLS uses a system called <a href="https://github.com/mpickering/hie-bios"><code>hie-bios</code></a> which allows it to understand your project configuration.
 At the time of writing of this article, the automatic detection does not always properly work, and it is advised to write yourself a file <code>./hie.yaml</code> that will explicitly define the project configuration.</p>
 <pre class="grvsc-container dark-visual-studio" data-language="yaml" data-index="11"><code class="grvsc-code"><span class="grvsc-line"><span class="grvsc-source"><span class="mtk4">cradle</span><span class="mtk1">:</span></span></span>
 <span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">  </span><span class="mtk4">stack</span><span class="mtk1">:</span></span></span></code></pre>
 <blockquote>
-<p>This file tells HLS that our project is a Stack project, it will detect all the rest by itslef: neat!</p>
+<p>This file tells HLS that our project is a Stack project, it will detect all the rest by itself: neat!</p>
 </blockquote>
 <p>In order to prevent some possible errors, let's rebuild our project once before launching HLS.</p>
 <pre class="grvsc-container dark-visual-studio" data-language="bash" data-index="12"><code class="grvsc-code"><span class="grvsc-line"><span class="grvsc-source"><span class="mtk1">stack build</span></span></span></code></pre>
